@@ -1053,7 +1053,7 @@
     function validateField(input) {
         const validationType = input.dataset.validation;
         const value = input.value.trim();
-        const errorElement = document.getElementById(`${input.id}-error`);
+        const errorElement = document.ById(`${input.id}-error`);
         
         let isValid = true;
         let errorMessage = '';
@@ -1105,7 +1105,7 @@
         let allValid = true;
 
         requiredFields.forEach(field => {
-            const input = document.getElementById(field.id);
+            const input = document.ById(field.id);
             if (input) {
                 const value = input.value.trim();
                 const isValid = validateField(input);
@@ -2196,56 +2196,49 @@ function updateGrossRowStyling(slabInfo, mnpCount) {
     // =============================================
     // SUBMIT TO GOOGLE SHEETS
     // =============================================
-    document.getElementById('submitBtn').addEventListener('click', async function() {
-        if (!capturedPhoto) {
-            showToast('⚠️ Please capture a photo before submitting!', 'warning', 4000);
-            return;
-        }
+   document.getElementById('submitBtn').addEventListener('click', async function() {
+    if (!capturedPhoto) {
+        showToast('⚠️ Please capture a photo before submitting!', 'warning', 4000);
+        return;
+    }
+    
+    if (!geoLocation) {
+        showToast('⚠️ Location not captured. Please try capturing photo again!', 'warning', 4000);
+        return;
+    }
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const loading = document.getElementById('loadingOverlay');
+    const loadingText = document.getElementById('loadingText');
+    const loadingSubtext = document.getElementById('loadingSubtext');
+    
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ Submitting...';
+    loading.style.display = 'flex';
+    loadingText.textContent = '📤 Submitting Data to Server...';
+    
+    try {
+        const formData = collectFormData();
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify(formData)
+        });
         
-        if (!geoLocation) {
-            showToast('⚠️ Location not captured. Please try capturing photo again!', 'warning', 4000);
-            return;
-        }
+        loading.style.display = 'none';
+        submitBtn.disabled = false;
+        submitBtn.textContent = '✅ Submitted!';
+        showToast(`✅ Enrollment submitted successfully!`, 'success', 6000);
         
-        if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbxoqPaxN-rxTDB4kBm6BNltkWA6kqq8L1qz2rK56ayM6U4rSoBflWDFMmkdyFRVUB7DoQ/exec') {
-            const data = collectFormData();
-            alert(`✅ ENROLLMENT DATA READY!\n\n...`);
-            return;
-        }
-        
-        const submitBtn = document.getElementById('submitBtn');
-        const loading = document.getElementById('loadingOverlay');
-        const loadingText = document.getElementById('loadingText');
-        const loadingSubtext = document.getElementById('loadingSubtext');
-        
-        submitBtn.disabled = true;
-        submitBtn.textContent = '⏳ Submitting...';
-        loading.style.display = 'flex';
-        loadingText.textContent = '📤 Submitting Data to Server...';
-        
-        try {
-            const formData = collectFormData();
-            await fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify(formData)
-            });
-            
-            loading.style.display = 'none';
-            submitBtn.disabled = false;
-            submitBtn.textContent = '✅ Submitted!';
-            showToast(`✅ Enrollment submitted successfully!`, 'success', 6000);
-            
-            setTimeout(() => { submitBtn.textContent = 'Submit Data'; }, 3000);
-        } catch (error) {
-            loading.style.display = 'none';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Data';
-            showToast('❌ Error submitting. Please try again.', 'error');
-        }
-    });
-
+        setTimeout(() => { submitBtn.textContent = 'Submit Data'; }, 3000);
+    } catch (error) {
+        loading.style.display = 'none';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Data';
+        showToast('❌ Error submitting. Please try again.', 'error');
+    }
+});
     function autoCalcTotalTarget() {
         const dsr = parseInt(document.getElementById('dsrTarget').value) || 0;
         const mnp = parseInt(document.getElementById('mnpTarget').value) || 0;
@@ -2753,4 +2746,5 @@ function updateGrossRowStyling(slabInfo, mnpCount) {
 </body>
 
 </html>
+
 
