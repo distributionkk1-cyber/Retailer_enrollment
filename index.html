@@ -827,11 +827,11 @@
         <div class="tier-section">
             <label class="tier-btn tier-platinum">
                 <input type="radio" name="tier" id="chckPlat" value="platinum">
-                <span>Platinum</span>
+                <span>Trident</span>
             </label>
             <label class="tier-btn tier-gold">
                 <input type="radio" name="tier" id="chckGold" value="gold">
-                <span>Gold</span>
+                <span>Non-Trident</span>
             </label>
             <!-- <label class="tier-btn tier-executive">
                 <input type="radio" name="tier" id="chckExec" value="executive">
@@ -931,7 +931,7 @@
                 <tr class="section-title"><td colspan="3">COMMITMENT & COMMISSION</td></tr>
 
                 <tr><th>Items</th><th>Count</th><th>Amount</th></tr>
-                <tr><td class="left"><span id="dsrLabel">DSR OTF - Rs.135</span></td><td><input type="number" id="dsrCount" placeholder="0" min="0"></td><td><input type="text" id="dsrAmount" readonly class="total-display"></td></tr>
+                <tr><td class="left"><span id="dsrLabel">Non MNP OTF - Rs.135</span></td><td><input type="number" id="dsrCount" placeholder="0" min="0"></td><td><input type="text" id="dsrAmount" readonly class="total-display"></td></tr>
                 <tr><td class="left">MNP OTF - Rs.235</td><td><input type="number" id="mnpCount" placeholder="0" min="0"></td><td><input type="text" id="mnpAmount" readonly class="total-display"></td></tr>
                 <tr class="gross-row slab-highlight" id="grossRow">
                     <td class="left">GROSS COMMITMENT & COMMISSION(DTR-Slab Incentive)</td>
@@ -1939,7 +1939,7 @@ function updateGrossRowStyling(slabInfo, mnpCount) {
     updateGrossRowStyling(slabInfo, mnpCount);
 
     // Margin Calculations
-    const tertiaryAmount = lapuTertiary * 0.039;
+    const tertiaryAmount = lapuTertiary * 0.003;
     const mnpDaysAmount = (lapuTertiary / 30 * 0.014) * mnpDays;
     const wifiDaysAmount = (lapuTertiary / 30 * 0.015) * wifiDays;
     document.getElementById('tertiaryAmount').value = tertiaryAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
@@ -2575,7 +2575,7 @@ function updateGrossRowStyling(slabInfo, mnpCount) {
         
         yPos = addSectionTitle('MARGIN CALCULATIONS', yPos);
         yPos = addThreeColumnRow('Item', 'Value', 'Amount (Rs.)', yPos, true);
-        yPos = addThreeColumnRow('Lapu Tertiary (3.9%)', document.getElementById('lapuTertiary').value || '0', document.getElementById('tertiaryAmount').value || '0', yPos);
+        yPos = addThreeColumnRow('Lapu Tertiary (3%)', document.getElementById('lapuTertiary').value || '0', document.getElementById('tertiaryAmount').value || '0', yPos);
         yPos = addThreeColumnRow('MNP Days (1.4%)', document.getElementById('mnpDays').value || '0', document.getElementById('mnpDaysAmount').value || '0', yPos);
         yPos = addThreeColumnRow('WiFi Days (1.5%)', document.getElementById('wifiDays').value || '0', document.getElementById('wifiDaysAmount').value || '0', yPos);
         yPos += 3;
@@ -2746,5 +2746,6 @@ function updateGrossRowStyling(slabInfo, mnpCount) {
 </body>
 
 </html>
+
 
 
