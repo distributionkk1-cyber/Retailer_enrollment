@@ -1009,7 +1009,7 @@
     // =============================================
     //  CONFIGURATION & GLOBALS
     // =============================================
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOeJR1nBbMWZairQh6RrmxkOKmnQyZEnWUwUlQ72VJ9cQ0TmKLlBd0bedcW9K4sRmRLw/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoqPaxN-rxTDB4kBm6BNltkWA6kqq8L1qz2rK56ayM6U4rSoBflWDFMmkdyFRVUB7DoQ/exec';
     
     let capturedPhoto = null;
     let geoLocation = null;
@@ -2207,7 +2207,7 @@ function updateGrossRowStyling(slabInfo, mnpCount) {
             return;
         }
         
-        if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+        if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbxoqPaxN-rxTDB4kBm6BNltkWA6kqq8L1qz2rK56ayM6U4rSoBflWDFMmkdyFRVUB7DoQ/exec') {
             const data = collectFormData();
             alert(`✅ ENROLLMENT DATA READY!\n\n...`);
             return;
@@ -2751,4 +2751,5 @@ function updateGrossRowStyling(slabInfo, mnpCount) {
     })();
 </script>
 </body>
+
 </html>
